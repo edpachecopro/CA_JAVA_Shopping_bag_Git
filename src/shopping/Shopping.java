@@ -5,7 +5,7 @@
  */
 package shopping;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class Shopping  {
 
@@ -13,9 +13,12 @@ private static String strInput;
 static String itemName;
 static double itemPrice;
 static int amountItems = 0;
-static String error1 = ":( Sorry It's not a valid number, please try again.";
+static String error = "\n## ERROR! ## - It's not a valid number, please try again.";
 static InputValidator sc = new InputValidator();
 static int intInput;
+static String exit;
+static String deleteOption;
+
 
     public static void main(String[] args) {
           
@@ -34,9 +37,9 @@ static int intInput;
         theMenu.add(new menu("Drink      ", "SoftDrink   ",4));
 
         // printing the head of the menu 
-        System.out.println("##########################################");
-        System.out.println("#########  WELCOME TO EL GRITO  ##########");
-        System.out.println("##########################################\n");
+        System.out.println("#############################################");
+        System.out.println("###########  WELCOME TO EL GRITO  ###########");
+        System.out.println("#############################################\n");
         System.out.println("ID:     Items           Category:       Price:\n");
         
       printMenu(theMenu); // call method to print the menu
@@ -60,113 +63,172 @@ static int intInput;
         
  
         System.out.println("\nHello there =), folow the Steps below to by on El Grito:");
-        System.out.println("\n1 - ADD ITEM TO BAD: cloose by ID");
-        System.out.println("2 - SELECT THE AMOUNT YOU WANT");
-        System.out.println("3 - TO LEAVE THE SHOP AND PAY PRESS: exit");
+        System.out.println("\n#1 - ADD ITEM TO SHOPPING BAG: cloose any Items by ID");
+        System.out.println("#2 - SELECT THE AMOUNT THAT YOU WANT");
+        System.out.println("#3 - TO LEAVE THE SHOP AND PAY TYPE: exit");
         System.out.println("\nPS: FREE DELIVERY FOR SHOPPING OVER €35");
         
-        intInput = sc.readInteger(error1);
-      
+        intInput = sc.readInteger(error); // First input from the user 
         
         ArrayList<inBag> mybag = new ArrayList<>(); // Item in the bag ArrayList
+        
+        
+        exit = sc.strInput; // leave the program in case of the user enter exit as first input
      
-        while (intInput != (00011122233300)) { // need fix it
+        //exit = exit.toLowerCase();
+        //while (intInput != (00011122233300)) { // need fix it
+     
+        
+        while (!exit.contains("exit")) { // need fix it
 
-            // checking if the number is greater than 0 and Less than ArrayList
-             while (intInput >= item.size() || intInput < 0){
-                System.out.println("Please choose a number betwen o to " + (item.size() -1) );
-                intInput = sc.readInteger( error1);
+            // checking if the number is greater than 0 and Less than ArrayList size
+            while (intInput >= item.size() || intInput < 0 && !exit.contains("exit")){
+                System.out.println("\n## ERROR! ## - Please choose a number betwen 0 to " + (item.size() -1) );
+                
+                intInput = sc.readInteger( error);
+                
              }
 
-            int userItem =  intInput;
-            System.out.println("How many " + item.get(userItem).getName().trim() + " do you want?");
-           
-            intInput = sc.readInteger(error1);
-
+            int userItem =  intInput; // getting the input from user and storege in userItem to add to bag
+            
+            System.out.println("How many " + item.get(userItem).getName().trim() + " do you want to add to Shopping Bag?"); 
+            intInput = sc.readInteger(error); // getting the amount for the choosen Item
+            
+            // creating and passing values to varible to store in new ArrayList (shooping-bag)
             amountItems =  intInput;
-
             itemName = item.get(userItem).getName();
             itemPrice = item.get(userItem).getPrice();
             
-           System.out.println( "\nYou added " +amountItems + " " +  item.get(userItem).getName().trim() + " to your bag." );
-           System.out.println("Keep shopping or type exit to leave the menu.");
-           intInput = sc.readInteger(error1);
+           System.out.println( "\nYou added " +amountItems + " " +  item.get(userItem).getName().trim() + " to your shopping Bag." );
+           System.out.println("Keep shopping or type \"exit\" to leave the menu.");
+           intInput = sc.readInteger(error);
+           exit = sc.strInput; // setting exit in case of user want to leave
            
+           // Adding the item to bag
            mybag.add(new inBag (itemName, amountItems , itemPrice));
 
         }
 
-        printBag(mybag);
+        printBag(mybag); // print Bag after user had type exit
         
 
     } // end chooseItems
     
     public static void printBag (ArrayList<inBag> myBag) { //printBag
            
-           double finalPrice = 0;
-            System.out.println("\n\nHere is you Shopbag:");
-             System.out.println("ID ===================AMOUNT ===PRICE");
-           for (int i = 0; i < myBag.size(); i++ ){
-  
-           System.out.println("[ " + i + " ]" + myBag.get(i));
-        
-            System.out.println("======================================");
-                
+        int bagSize = myBag.size();
+        double finalPrice = 0;
+        if (bagSize != 0){
             
-            finalPrice = finalPrice + myBag.get(i).getPrice() * myBag.get(i).getqtd();
+           System.out.println("\n     HERE IS YOUR SHOPPING BAG:");
+           System.out.println(" ID ---------------- AMOUNT ---- PRICE");
+           
+           for (int i = 0; i < myBag.size(); i++ ){
+                System.out.println("[ " + i + " ]" + myBag.get(i));
+                System.out.println("======================================");
+                finalPrice = finalPrice + myBag.get(i).getPrice() * myBag.get(i).getqtd();
             } 
            
-           System.out.println("                       Total is: " + finalPrice );
-           
-           System.out.println("/nPress 0 to remove Items or any number to pay:");
+           System.out.println("                      Total is: € " + finalPrice );
+           System.out.println("\nPress 0 to remove Items or any number to finish your shopping:");
            int removeItem;
            
-           removeItem = sc.readInteger(error1);
- 
-           
+           removeItem = sc.readInteger(error);
+
            if (removeItem == 0){
-               System.out.println("Thank you to Shop with us =)");
-           }else{
                removeItem(myBag);
+           }else{
+               printFinalBag(myBag);
            }
+           
+        }else 
+        {
+            System.out.println("\n###### You left the shop. ######");
+            System.out.println("### We appreciate your visit ###\n");
+        }
           
        
     } // printBag
     
-    public static void removeItem (ArrayList<inBag> myBag){
-
-        
+    public static void removeItem (ArrayList<inBag> itemRemove){
+  
      int idRemoveItem;
         
-     System.out.println("To remove Items from your Shopping Bag follow the Options below:");
-     System.out.println("1 - DELETE SINGLE ITEM: cloose by ID");
-     System.out.println("2 - DELETE ALL ITEM: type all");
-     System.out.println("3 - FINISH YOUR SHOPPING: type pay");
+     System.out.println("To remove Items from your Shopping Bag follow the options below:");
+     System.out.println("#1 - DELETE SINGLE ITEM: cloose by ID");
+     System.out.println("#2 - DELETE ALL ITEM: type all");
+     System.out.println("#3 - FINISH YOUR SHOPPING: type pay");
      
-     intInput = sc.readInteger(error1);
+     intInput = sc.readInteger(error);
+     deleteOption = sc.strInput;
      
-     
-     
-     
-             while (intInput != (00011122233300)) { // need fix it
-
+     if (deleteOption.contains("all")){
+         
+         itemRemove.clear();
+         System.out.println("\n## You choose delete aLl, Now your bag is empty");
+     } 
+     else if (deleteOption.contains("pay")){
+         printFinalBag(itemRemove);
+ 
+     } else{
+       
+             while (!deleteOption.contains("pay") )  {
+                 
             // checking if the number is greater than 0 and Less than ArrayList
-             while (intInput >= myBag.size() || intInput < 0){
-                System.out.println("Sorry :[ the ID " + intInput + "Choose between 0 to " + (myBag.size() -1) );
-                intInput = sc.readInteger( error1);
+             while (intInput >= itemRemove.size() || intInput < 0){
+                System.out.println("\n## ERROR! ## - The ID " + intInput + "choose a number between 0 to " + (itemRemove.size() -1) );
+                intInput = sc.readInteger( error);
              }
 
             int idRemove =  intInput;
 
-           myBag.remove(idRemove);
-
-
+            
+            if (idRemove == 0 ){
+            System.out.println("You have removed " + itemRemove.get(idRemove));
+            itemRemove.remove(idRemove);
+            System.out.println("\n## Now your bag is empty");
+            deleteOption = "pay";
+            }
+            else {
+            itemRemove.remove(idRemove);
+            printBag(itemRemove);
+            //System.out.println("To still removing choose another item by Id or press pay to finish your shop");
+            //intInput = sc.readInteger( error1);
+            }
         } // end
+         
+       }      
+             
+        if (intInput > 0) {
+        printFinalBag(itemRemove); 
+        }     
+            
      
-     
-
-    
     }
+    
+    public static void printFinalBag(ArrayList<inBag> finalBag) {
+        
+        System.out.println("\n\nHere is your Final Shopping:");
+        System.out.println("  ID -------- AMOUNT --- PRICE");
+        double finalPrice = 0;
+        double tax = 5.0;
+           for (int i = 0; i < finalBag.size(); i++ ){
+                System.out.println("[ " + i + " ]" + finalBag.get(i));
+                System.out.println("======================================");
+                finalPrice = finalPrice + finalBag.get(i).getPrice() * finalBag.get(i).getqtd();
+            } 
+           if (finalPrice < 35){
+              finalPrice = finalPrice + tax; 
+           System.out.println("                   Item total:   € " + finalPrice );
+           System.out.println("                 Delivery tax:   € 5.00");
+            
+           }
+           System.out.println("                 Delivery tax:   free");
+           System.out.println("                     Total is:   € " + finalPrice );
+           System.out.println("\nTHANK YOU FOR SHOPPING WITH US =)\n");
+        
+
+}
 
          
 }

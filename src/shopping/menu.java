@@ -11,8 +11,7 @@ package shopping;
  */
 public class menu  {
     
-    
-  
+
        private String Name;
        private String Course;
        private double Price;

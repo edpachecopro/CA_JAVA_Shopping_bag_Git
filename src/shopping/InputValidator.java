@@ -2,25 +2,22 @@ package shopping;
 import java.util.Scanner;
 
 class InputValidator extends Shopping {
-
-private final Scanner in;
-
-InputValidator(){
-    in = new Scanner(System.in);
     
-}
+    String strInput;
+    String inExeptions = "exit pay all";
+    private final Scanner in;
+
+InputValidator() { in = new Scanner(System.in); }
 
 public int readInteger( String errorMsg) {
     
  int num = 0;
- String strInput;
  boolean valid = false;
  
  while (valid == false){
-     
  
      strInput = in.nextLine();  // /Getting the input from the user
- 
+     strInput = strInput.toLowerCase(); // changing the string to lowercase
      try{ // Keep looking until the user input a valid number or enter exit 
  
      num = Integer.parseInt(strInput); //  try to converte String to int
@@ -28,26 +25,23 @@ public int readInteger( String errorMsg) {
      
      }
      catch (NumberFormatException e) {
-         if ("exit".equals(strInput)){
+         
+         if ("exit".equals(strInput) || "pay".equals(strInput) || "all".equals(strInput)) {
           valid = true;
-          num = 00011122233300;
-         
-         
-         } else {
-         System.out.println(errorMsg);
          }
-
+         else {
+             System.out.println(errorMsg);
+         }
      }
-     
 
  }
     
  return num;
-
-
 }
 
-
-    
-    
+public String getstrInput(){
+return this.strInput;
+         
+}
+   
 }
