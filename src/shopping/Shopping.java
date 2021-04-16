@@ -37,11 +37,11 @@ public class Shopping extends ShoppingBag {
     } // end main 
     
 
-    public static void printMenu (ArrayList<menu> printAll){ // printMenu
+    public static void printMenu (ArrayList<menu> printMenu){ // printMenu
          System.out.println("''''''''''''''''' MENU  '''''''''''''''''''''\n");
          System.out.println("ID:     Items           Category:       Price:\n"); 
-         for (int i = 0; i < printAll.size(); i++ ){    
-            System.out.println("[ " + i + " ]" + printAll.get(i));
+         for (int i = 0; i < printMenu.size(); i++ ){    
+            System.out.println("[ " + i + " ]" + printMenu.get(i));
             System.out.println("==============================================");
         }
        

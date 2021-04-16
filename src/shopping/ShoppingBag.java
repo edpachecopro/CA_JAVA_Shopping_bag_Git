@@ -17,7 +17,7 @@ public class ShoppingBag  extends InputValidator { // extending class InputValid
         
         if (bagSize != 0){ // if bagSize is not empty print the bag to user
             
-           System.out.println("\n     HERE IS YOUR SHOPPING BAG:");
+           System.out.println("\n      HERE IS YOUR SHOPPING BAG:\n");
            System.out.println(" ID ---------------- AMOUNT ---- PRICE");
            
            // for loop to print the bag 
@@ -114,28 +114,32 @@ public class ShoppingBag  extends InputValidator { // extending class InputValid
        
 
      
-public static void printFinalBag(ArrayList<inBag> finalBag) {
+public static void printFinalBag(ArrayList<inBag> finalBag) { // Printing the final Bag with Final price and end the program
         
-        System.out.println("\nHere is your Final Shopping:");
-        System.out.println("ITEMS ------ AMOUNT --- PRICE");
-        double finalPrice = 0;
-        double tax = 5.0;
+        System.out.println("\n    HERE IS YOUR SHOPPING :\n");
+        System.out.println("ITEMS ------- AMOUNT --- PRICE");
+        
+        double finalPrice = 0;// initializing finalPrice to 0 
+        double deliveryfee = 5.0; // initializing price to delivery fee
+        
+        // Printing the final bag 
            for (int i = 0; i < finalBag.size(); i++ ){
                 System.out.println(finalBag.get(i));
-                System.out.println("================================");
+                System.out.println("===============================");
                 finalPrice = finalPrice + finalBag.get(i).getPrice() * finalBag.get(i).getqtd();
             } 
-           if (finalPrice < 35){
-              finalPrice = finalPrice + tax; 
            
-           System.out.println("         Delivery tax:   € 5.00");
-           System.out.println("           Item total:   € " + finalPrice );
-           System.out.println("\nTHANK YOU FOR SHOPPING WITH US =)\n");
+           if (finalPrice < 35){ // checking if finalPrice to add the delivery fee
+               
+               finalPrice = finalPrice + deliveryfee; // adding Delivery fee to finalPrice
+                System.out.println("       Delivery fee:   € 5.00");
+                System.out.println("         Item total:   € " + finalPrice );
+                System.out.println("\nTHANK YOU FOR SHOPPING WITH US =)\n");
             
-           }else{
-           System.out.println("         Delivery tax:   free");
-           System.out.println("             Total is:   € " + finalPrice );
-           System.out.println("\nTHANK YOU FOR SHOPPING WITH US =)\n");
+           }else{ //finalPrice with free Delivery
+                System.out.println("       Delivery fee:   free");
+                System.out.println("           Total is:   € " + finalPrice );
+                System.out.println("\nTHANK YOU FOR SHOPPING WITH US =)\n");
            }
 
 }

@@ -29,6 +29,7 @@ public class removeItems extends ShoppingBag {
      if (deleteOption.contains("all")){ // if user want to delete all the items in the bag   
          itemRemove.clear(); // delete all the items in the bag
          System.out.println("\n## You choose delete aLl, Now your bag is empty");
+         System.exit(0);// stop the program
      } 
      else if (deleteOption.contains("pay")){ // if user want to finish print final bag and finish the program
          printFinalBag(itemRemove);
@@ -37,7 +38,7 @@ public class removeItems extends ShoppingBag {
        
              while (!deleteOption.contains("pay" ) || !deleteOption.contains("all") )  { // checking if user want to leave or keeping deleting
                  
-            // checking if the number is greater than 0 and Less than ArrayList
+            // checking if the user input is greater than 0 and Less than ArrayList
              while (intInput >= itemRemove.size() || intInput < 0){ // check if the input is on the range of the Arraylist size
                 // Msg error after a wrong input 
                 System.out.println("\n## ERROR! ## - choose a number between 0 to " + (itemRemove.size() -1) );
@@ -48,14 +49,14 @@ public class removeItems extends ShoppingBag {
 
             if (itemRemove.size() == 1){ // checking if there just one item in the bag. if it is true run the code below and finish the program 
                 
-                System.out.println("You have removed the last item in your bad: " + itemRemove.get(idRemove)); // Msg last item was successfully deleted
+                System.out.println("\nYou removed the last item in your bag: " ); // Msg last item was successfully deleted
                 itemRemove.remove(idRemove); // remove the last item
-                System.out.println("\n## Now your bag is empty \n THANK YOU FOR YOUR VISIT =]");
-                deleteOption = "pay"; // set deleteOption to "pay"to finish the loop and program
+                System.out.println("Now your bag is empty \nTHANK YOU FOR YOUR VISIT =]\n");
+                System.exit(0); // stop the program
             
             }
             else if (deleteOption.contains("pay")) { // if user choose finish typing "pay"
-            printBag(itemRemove, 2);// check it 
+            printBag(itemRemove, 2);
             }
             else
             {
@@ -63,8 +64,7 @@ public class removeItems extends ShoppingBag {
             itemRemove.remove(idRemove);
 
             printBag(itemRemove, 2);
-            //System.out.println("To still removing choose another item by Id or press pay to finish your shop");
-            //intInput = sc.readInteger( error1);
+
             }
         } // end
          

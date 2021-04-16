@@ -4,9 +4,9 @@ import java.util.Scanner;
 class InputValidator {
     
     String strInput;
-    String inExeptions = "exit pay all";
+
     private final Scanner in;
-    static String error = "\n## ERROR! ## - It's not a valid number, please try again.";
+    static String error = "\n## ERROR! ## -  It's not a valid number, please try again.";
     static InputValidator sc = new InputValidator();
     static String itemName;
     static double itemPrice;
@@ -25,19 +25,20 @@ public int readInteger( String errorMsg) {
  while (valid == false){
  
      strInput = in.nextLine();  // /Getting the input from the user
-     strInput = strInput.toLowerCase(); // changing the string to lowercase
-     try{ // Keep looking until the user input a valid number or enter exit 
+     strInput = strInput.toLowerCase(); // changing the string to lowercase in case of user type EXIT for example
+     
+     try{ 
  
      num = Integer.parseInt(strInput); //  try to converte String to int
      valid = true; // if find a valid number change valid to true
      
      }
      catch (NumberFormatException e) {
-         
+         // checking exeptions worlds to set valid to true
          if ("exit".equals(strInput) || "pay".equals(strInput) || "all".equals(strInput)) {
           valid = true;
          }
-         else {
+         else { // if user didn't typed a number
              System.out.println(errorMsg);
          }
      }
@@ -47,9 +48,8 @@ public int readInteger( String errorMsg) {
  return num;
 }
 
-public String getstrInput(){
-return this.strInput;
-         
-}
+//public String getstrInput(){
+//return this.strInput;         
+//}
    
 }
