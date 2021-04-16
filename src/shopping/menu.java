@@ -10,15 +10,12 @@ package shopping;
  * @author edgardpacheco
  */
 public class menu  {
-    
 
        private String Name;
        private String Course;
        private double Price;
-       private int Amount;
-       
-       
-       // Class
+       private int qtd;
+
        public menu ( String course, String name, double price){
            
    
@@ -33,7 +30,7 @@ public class menu  {
            return this.Name;
        }
        
-       public String getName(String newName){
+       public String setName(String newName){
            return (this.Name = newName);
        }
        
@@ -42,7 +39,7 @@ public class menu  {
            return this.Course;
        }
        
-       public String getCourse(String newCourse){
+       public String etCourse(String newCourse){
            return (this.Course = newCourse);
        }
        
@@ -57,6 +54,15 @@ public class menu  {
         return (this.Price = newPrice);
        
        }
+       
+        // get Amount
+        public int getqtd(){
+           return this.qtd;
+       }
+       // set Amount
+       public int getqtd(int newqtd){
+           return (this.qtd = newqtd);
+       }
 
        
 
@@ -64,8 +70,11 @@ public class menu  {
        @Override
        public String toString(){
        return String.format("\t%s\t%s\t€ %.2f", this.Name, this.Course, this.Price);
-           //return String.format("%s\t%f", this.Name, this.Price);
+          
        }
+       
+       
+       
 
     
 }

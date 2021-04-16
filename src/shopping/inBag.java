@@ -17,7 +17,7 @@ public class inBag {
        private double Price;
        
        
-       //Student Class
+       
        public inBag ( String name, int qtd, double price){
            
    
@@ -53,7 +53,7 @@ public class inBag {
        }      
        
        
-       public double setPrice ( double newPrice){      
+       public double setPrice(double newPrice){      
         return (this.Price = newPrice);
        
        }
@@ -61,7 +61,7 @@ public class inBag {
        //Override
        @Override
        public String toString(){
-       return String.format("\t%s\t%s\t€%.2f", this.Name, this.qtd, this.Price);
+       return String.format("%s\t%s\t€%.2f", this.Name, this.qtd, this.Price);
            //return String.format("%s\t%f", this.Name, this.Price);
        }
     

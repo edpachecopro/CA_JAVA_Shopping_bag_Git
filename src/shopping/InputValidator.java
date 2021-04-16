@@ -1,11 +1,19 @@
 package shopping;
 import java.util.Scanner;
 
-class InputValidator extends Shopping {
+class InputValidator {
     
     String strInput;
     String inExeptions = "exit pay all";
     private final Scanner in;
+    static String error = "\n## ERROR! ## - It's not a valid number, please try again.";
+    static InputValidator sc = new InputValidator();
+    static String itemName;
+    static double itemPrice;
+    static int amountItems = 0;
+    static int intInput;
+    static String exit;
+    static String deleteOption;
 
 InputValidator() { in = new Scanner(System.in); }
 
