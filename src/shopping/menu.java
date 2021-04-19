@@ -17,8 +17,7 @@ public class menu  {
        private int qtd;
 
        public menu ( String course, String name, double price){
-           
-   
+
            this.Name = name;
            this.Course = course;
            this.Price = price;
@@ -70,7 +69,7 @@ public class menu  {
        @Override
        public String toString(){
        return String.format("\t%s\t%s\t€ %.2f", this.Name, this.Course, this.Price);
-          
+        
        }
        
        

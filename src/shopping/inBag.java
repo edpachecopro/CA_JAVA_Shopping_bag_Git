@@ -9,7 +9,7 @@ package shopping;
  *
  * @author edgardpacheco
  */
-public class inBag {
+public class inBag  {
     
      
        private String Name;
@@ -61,7 +61,7 @@ public class inBag {
        //Override
        @Override
        public String toString(){
-       return String.format("%s\t%s\t€%.2f", this.Name, this.qtd, this.Price);
+       return String.format("%s\t%s\t€ %.2f", this.Name, this.qtd, this.Price);
            //return String.format("%s\t%f", this.Name, this.Price);
        }
     

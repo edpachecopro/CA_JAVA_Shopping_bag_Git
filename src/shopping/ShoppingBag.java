@@ -6,10 +6,9 @@ import static shopping.Shopping.printMenu;
 import static shopping.removeItems.removeItem;
 
 
-
 public class ShoppingBag  extends InputValidator { // extending class InputValidator
     
-
+    
     public static void printBag (ArrayList<inBag> myBag , int firstTime) { //printBag
            
         int bagSize = myBag.size(); // initializing bagsize to the size of the bag to check if it is empty
@@ -18,15 +17,16 @@ public class ShoppingBag  extends InputValidator { // extending class InputValid
         if (bagSize != 0){ // if bagSize is not empty print the bag to user
             
            System.out.println("\n      HERE IS YOUR SHOPPING BAG:\n");
-           System.out.println(" ID ---------------- AMOUNT ---- PRICE");
+           System.out.println("ID:                  AMOUNT:    PRICE:\n");
            
            // for loop to print the bag 
            for (int i = 0; i < myBag.size(); i++ ){
+                System.out.println("⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙");
                 System.out.println("[ " + i + " ]" + myBag.get(i));
-                System.out.println("======================================");
+                System.out.println("⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙");
             } 
            
-           // printing a msg to see if user want to finish or delete something from the bag 
+           // printing a message to see if user want to finish or delete something from the bag 
            
            if (firstTime == 0){
                
@@ -34,9 +34,9 @@ public class ShoppingBag  extends InputValidator { // extending class InputValid
                 int removeItem; 
                 removeItem = sc.readInteger(error); // declaring removeItem to the user input
                 
-                if (removeItem == 0){ // if user selected remove call the method to remove Items
+                if (removeItem == 0){ // if user selected remove, call the method removeItems
                     removeItem(myBag);
-                }else{ // if user selected finish print the final bag and finish the program
+                }else{ // if user selected finish, print the final bag and finish the program
                     printFinalBag(myBag);
                 }
            
@@ -47,10 +47,10 @@ public class ShoppingBag  extends InputValidator { // extending class InputValid
            }
            
            
-        }else // if Bag is empty,print the msg below and finish the program
+        }else // if the bag is empty, print the message below and finish the program
         {
-            System.out.println("\n###### You left the shop. ######");
-            System.out.println("### We appreciate your visit ###\n");
+            System.out.println("\n⁙⁙⁙⁙⁙⁙⁙ You left the shop. ⁙⁙⁙⁙⁙⁙⁙");
+            System.out.println("⁙⁙⁙⁙ We appreciate your visit ⁙⁙⁙⁙\n");
         }
           
        
@@ -58,53 +58,51 @@ public class ShoppingBag  extends InputValidator { // extending class InputValid
     
        public static void chooseItems (ArrayList<menu> item) { //chooseItems
         
-        // printing 3 instructions to how users can buy or give up shopping
-        System.out.println("\nHello there =), folow the Steps below to by on El Grito:");
-        System.out.println("\n#1 - ADD ITEM TO SHOPPING BAG: cloose any Items by ID");
+        // printing 3 instructions to how users can buy or stop shopping
+        System.out.println("\nHello there =), folow the Steps below to buy on El Grito:");
+        System.out.println("\n#1 - ADD ITEM TO SHOPPING BAG: choose any item by ID");
         System.out.println("#2 - SELECT THE AMOUNT THAT YOU WANT");
         System.out.println("#3 - TO LEAVE THE SHOP AND PAY TYPE: exit");
         System.out.println("\nPS: FREE DELIVERY FOR SHOPPING OVER €35 =]");
         
         intInput = sc.readInteger(error); // getting the first input from the user 
         
-        ArrayList<inBag> mybag = new ArrayList<>(); // creating an new ArrayList object to storage the item that user will choose
+        ArrayList<inBag> mybag = new ArrayList<>(); // creating a new ArrayList object to store the items that the user will choose
         
         
-        exit = sc.strInput; // leave the program in case of the user enter exit as first input
+        exit = sc.strInput; // leave the program in case of the user types exit as first input
     
-        while (!exit.contains("exit")) { // while user don't choose leave the program will still ask if he/she want keep buying
+        while (!exit.contains("exit")) { // while user does not choose leave, the program will still ask if he/she wants to keep buying
 
-            // checking if the user input is greater than 0 and Less than ArrayList size and also if he/she choose leave
+            // checking if the user input is greater than 0 and Less than ArrayList size and also if he/she chooses to leave
             while (intInput >= item.size() || intInput < 0 && !exit.contains("exit")){
                 System.out.println("\n## ERROR! ## - Please choose a number betwen 0 to " + (item.size() -1) );
                 intInput = sc.readInteger( error); // getting the new input after a wrong one
                 
              }
 
-            int userItem =  intInput; // getting the input from user and storege in userItem to add  the item to bag
+            int userItem =  intInput; // getting the input from user and store in userItem to add  the item to the bag
             
-            // asking how many Items they want to add to shopbag
+            // asking how many items they want to add to shopping bag
             System.out.println("How many " + item.get(userItem).getName().trim() + " do you want to add to Shopping Bag?"); 
             intInput = sc.readInteger(error); // getting the amount for the choosen Item
             
-            // creating and passing values to varible to store in new ArrayList (shooping-bag)
+            // creating and passing values to varibles to store in new ArrayList (shopping bag)
             amountItems =  intInput;
             itemName = item.get(userItem).getName();
             itemPrice = item.get(userItem).getPrice();
-           // printing msg to users that the item was successfully added 
+           // printing messsage to users that the item was successfully added 
            System.out.println( "\nYou added " +amountItems + " " +  item.get(userItem).getName().trim() + " to your shopping Bag.\n" );
            
            printMenu(item); // printing menu again to users
            
-           // Msg for users choose keep shooping or leave
+           // Message for users to continue shopping or leave
            System.out.println("\nKeep shopping or type \"exit\" to leave the menu.");
            intInput = sc.readInteger(error); // getting new input 
-           exit = sc.strInput; // setting the new input to varable exit in case of user want to leave
+           exit = sc.strInput; // setting the new input to variable exit in case the user wants to leave
            
            // Adding the item to bag
            mybag.add(new inBag (itemName, amountItems , itemPrice));
-            
-
         }
 
         printBag(mybag, 0 ); // print Bag after users selected leave
@@ -116,8 +114,10 @@ public class ShoppingBag  extends InputValidator { // extending class InputValid
      
 public static void printFinalBag(ArrayList<inBag> finalBag) { // Printing the final Bag with Final price and end the program
         
+
         System.out.println("\n    HERE IS YOUR SHOPPING :\n");
-        System.out.println("ITEMS ------- AMOUNT --- PRICE");
+        System.out.println("ITEMS:       AMOUNT:     PRICE:\n");
+        System.out.println("⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙");
         
         double finalPrice = 0;// initializing finalPrice to 0 
         double deliveryfee = 5.0; // initializing price to delivery fee
@@ -125,11 +125,11 @@ public static void printFinalBag(ArrayList<inBag> finalBag) { // Printing the fi
         // Printing the final bag 
            for (int i = 0; i < finalBag.size(); i++ ){
                 System.out.println(finalBag.get(i));
-                System.out.println("===============================");
+                System.out.println("⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙⁙");
                 finalPrice = finalPrice + finalBag.get(i).getPrice() * finalBag.get(i).getqtd();
             } 
            
-           if (finalPrice < 35){ // checking if finalPrice to add the delivery fee
+           if (finalPrice < 35){ // checking if finalPrice needs a delivery fee
                
                finalPrice = finalPrice + deliveryfee; // adding Delivery fee to finalPrice
                 System.out.println("       Delivery fee:   € 5.00");

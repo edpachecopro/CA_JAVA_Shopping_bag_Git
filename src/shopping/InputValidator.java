@@ -25,20 +25,20 @@ public int readInteger( String errorMsg) {
  while (valid == false){
  
      strInput = in.nextLine();  // /Getting the input from the user
-     strInput = strInput.toLowerCase(); // changing the string to lowercase in case of user type EXIT for example
+     strInput = strInput.toLowerCase(); // changing the string to lowercase in case of the user types "EXIT" for example
      
      try{ 
  
-     num = Integer.parseInt(strInput); //  try to converte String to int
-     valid = true; // if find a valid number change valid to true
+     num = Integer.parseInt(strInput); //  try to converte String to integer
+     valid = true; // if find a valid number, change valid to true
      
      }
      catch (NumberFormatException e) {
-         // checking exeptions worlds to set valid to true
+         // checking exceptations words to set valid to true
          if ("exit".equals(strInput) || "pay".equals(strInput) || "all".equals(strInput)) {
           valid = true;
          }
-         else { // if user didn't typed a number
+         else { // if user didn't type a numb9er
              System.out.println(errorMsg);
          }
      }
@@ -46,10 +46,5 @@ public int readInteger( String errorMsg) {
  }
     
  return num;
-}
-
-//public String getstrInput(){
-//return this.strInput;         
-//}
-   
+}  
 }
